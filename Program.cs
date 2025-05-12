@@ -1,11 +1,14 @@
 ﻿Demo([0,1,0,3,12]);
 Demo([0]);
-Demo([0,12,654,12,0,3,60,0,89,0,0,0,3,1,1,3,6,8,53,2,15]);
+Demo([0,0,1,0,0,0,0,0,2,3,0,0,0,4,0,5]);
+// this doesn't seem to work
+
+
 
 void Demo(int[] array)
 {
     Console.WriteLine($"[{string.Join(", ", array)}]");
-    MoveZero(array);
+    MoveZeroFixed(array);
     Console.WriteLine($"[{string.Join(", ", array)}]");
 }
 
@@ -33,4 +36,22 @@ void SwapIntegers(int[] array, int index1, int index2)
     array[index1] = array[index2] - array[index1];
     array[index2] = array[index2] - array[index1];
     array[index1] = array[index1] + array[index2];
+}
+
+void MoveZeroFixed(int[] array)
+{
+    // traverse right, making a "bubble" increasing in size that moves all the nonzero from right to left
+    int left = 0;
+    int right = 0;
+
+    while (right <= array.Length - 1)
+    {
+        if (array[right] == 0) { right++; }
+        else
+        {
+            SwapIntegers(array,left,right);
+            left++;
+            right++;
+        }
+    }
 }
